@@ -1,7 +1,7 @@
 import { useReducer, useState  } from "react";
 
 type Todo ={
-    id: string,
+    id: number,
     content : string,
     complete : boolean
 }

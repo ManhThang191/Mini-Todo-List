@@ -113,9 +113,10 @@
 import React from 'react'
 import { useReducer, useState } from 'react'
 // import reducer_Todo from '../UseReducer/UseReducer'
-import { Input, Button } from 'antd'
-import Icon from '@ant-design/icons'
-
+import { Input, Button, Checkbox } from 'antd'
+import { CloseOutlined, CarryOutOutlined} from '@ant-design/icons'
+import "tailwindcss";
+import Todo from '../Todos/Todo';
 
 type Todo = {
     id: number,
@@ -125,15 +126,20 @@ type Todo = {
 
 type Action = | { type: "ADD_todo"; payload: string } | { type: "TOGGLE_todo"; payload: number } | { type: "DELE_todo"; payload: number }
 
+
+// mang ban dau trong
 const InitialState: Todo[] = [];
 
 function reducer_Todo(state: Todo[], action: Action): Todo[] {
     switch (action.type) {
-        case "ADD_todo":
-            return [...state, { id: Date.now(), content: action.payload, complete: false }];
+        case "ADD_todo":{
+            return  [...state, { id: Date.now(), content: action.payload, complete: false }];
+            
+        }
+            
         case "TOGGLE_todo":
             return state.map(todo =>
-                todo.id == action.payload ? { ...todo, complete: !todo.complete } : todo
+                todo.id === action.payload ? { ...todo, complete: !todo.complete } : todo
             );
         case "DELE_todo":
             return state.filter(todo => todo.id !== action.payload);
@@ -141,6 +147,8 @@ function reducer_Todo(state: Todo[], action: Action): Todo[] {
             return state;
     }
 }
+
+
 
 function TodoList() {
     const [state, dispatch] = useReducer(reducer_Todo, InitialState);
@@ -153,36 +161,39 @@ function TodoList() {
         }
     }
     return (
-        <div>
-            <div className="p-4 max-w-md mx-auto">
-                <h1 className="text-xl font-bold mb-2">Todo List</h1>
-                <div className="flex gap-2 mb-4">
-                    <input
+        <div className="container">
+            <div className="content">
+                <h1 className="title"> <CarryOutOutlined /> Todo List</h1>
+                <div className="input_content">
+                    <Input  
+                        className="input"
                         type="text"
                         value={text}
                         onChange={e => setText(e.target.value)}
-                        className="border p-2 w-full"
-                        placeholder="Thêm công việc..."
-                    />
-                    <button onClick={handleAddTodo} className="bg-blue-500 text-white px-4 py-2 rounded">
+                        placeholder="Thêm công việc...">
+                    
+                    </Input>
+                    <Button
+                        className='button' 
+                        onClick={handleAddTodo}>
                         Add
-                    </button>
+                    </Button>
                 </div>
-                <ul>
+                <ul className='list'>
                     {state.map(todo => (
-                        <li key={todo.id} className="flex justify-between p-2 border-b">
-                            <span
-                                className={`cursor-pointer ${todo.complete ? "line-through text-gray-500" : ""}`}
-                                onClick={() => dispatch({ type: "TOGGLE_todo", payload: todo.id })}
-                            >
+                        <li key={todo.id} className="" >
+                                <Checkbox className='check_box'
+                                
+                                    onChange={() => dispatch({ type: "TOGGLE_todo", payload: todo.id })}
+                                    checked={todo.complete}                                    
+                                >
+                                </Checkbox>
                                 {todo.content}
-                            </span>
-                            <button
-                                onClick={() => dispatch({ type: "DELE_todo", payload: todo.id })}
-                                className="bg-red-500 text-white px-2 py-1 rounded"
+                            <Button onClick={() => dispatch({ type: "DELE_todo", payload: todo.id })}
+                                className=""
                             >
-                                X
-                            </button>
+                            <CloseOutlined />
+                            </Button>
                         </li>
                     ))}
                 </ul>
