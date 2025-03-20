@@ -116,8 +116,10 @@ import { useReducer, useState } from 'react'
 import { Input, Button, Checkbox } from 'antd'
 import { CloseOutlined, CarryOutOutlined } from '@ant-design/icons'
 import "tailwindcss";
-import Todo from '../Todos/Todo';
+// import Todo from '../Todos/Todo';
 import Clock from '../Clock/Clock';
+
+
 type Todo = {
     id: number,
     content: string,
@@ -195,10 +197,9 @@ function TodoList() {
                         placeholder="Thêm công việc..."
                         onKeyDown={handleKeyDown}
                     >
-
                     </Input>
                     <Button
-                        className='button'
+                        className='button_add'
                         onClick={handleAddTodo}
                     >
                         Add

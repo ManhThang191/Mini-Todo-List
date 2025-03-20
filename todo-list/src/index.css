@@ -112,17 +112,18 @@ button:focus-visible {
   
 }
 .input_content{
-  transform: scale(1.2);
+  
 }
 
 .input{
-  max-width: 70%;
-  margin: 20px;
+  max-width: 60%;
+  margin: 20px 100px;
+  transform: scale(1.2);
 }
 
-.button{
+.button_add{
   font-weight: bold;
-  
+  transform: scale(1.2);
 }
 
 .list{
