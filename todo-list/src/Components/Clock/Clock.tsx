@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import {ClockCircleOutlined, RedoOutlined} from '@ant-design/icons'
 
 function Clock() {
     const [time, setTime] = useState(new Date());
@@ -47,10 +48,21 @@ function Clock() {
                     background: "#333",
                     color: "yellow",
                     minWidth : "40%",
-                    marginTop: "20px"
-
+                    marginTop: "20px",
+                    display: "flex",
+                    justifyContent: "space-around"
                 }}>
+                    <ClockCircleOutlined style={{
+                        marginRight: "10px"
+                    }}/>
+
                     {formatTime()}
+
+                    <RedoOutlined onClick={() => setIs12HoutFormat(!is12HourFormat)}
+                        style={{
+                            marginLeft: "10px"
+                        }}    
+                    />
                 </div>
                 {/* <button onClick={() => setIs12HoutFormat(!is12HourFormat)}
                     style={{

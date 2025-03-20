@@ -75,7 +75,7 @@ button:focus-visible {
 }
 
 :root{
-  --smooth: all 0.3s ease-in
+  --smooth: all 0.1s ease-in
 
 }
 .container{
@@ -90,7 +90,7 @@ button:focus-visible {
 }
 
 .content{
-  min-width: 70%;
+  min-width: 100%;
   /* max-width: 80%; */
   height: 100%;
   padding: 40px;
@@ -129,43 +129,55 @@ button:focus-visible {
   text-decoration: none;
   list-style: none;
   text-align: start;
-  /* display: flex; */
-  /* flex-flow: column;
-  justify-content: space-between; */
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
 }
 
 .list li {
-  background: #9ff5a3;
-  margin: 20px;
-  justify-content: space-between;
-  display: flex;
-  /* text-align: center; */
-  align-items: center;
-  font-size: 30px;
-  padding: 10px 30px;
+  background: #93ee96;
   border-radius: 12px;
-  margin: 15px;
-  
+  width: 70% ;
+  display: flex;
+  margin: 10px;
+  padding: 10px 30px;
+  justify-content: space-between;
+  font-size: 25px;
+  position: relative;
+  /* z-index: 1; */
 }
 
 .list li:hover{
-  transform: scale(1.1);
-  transition: var(--smooth);
   cursor: pointer;
-  background-color: #49f551;
+  transform: scale(1.02);
+  
+}
+.check_box{
+  transform: scale(2);
+  /* background: #5a3c3c; */
+  /* width: 80%; */
+  z-index: 0;
 }
 
-.check_box{
-  /* background: #eae6e6; */
-  /* width: 10%; */
-  /* height: auto; */
-  font-size: large;
-  transform: scale(2);
+.todo_content{
+  background: rgb(81, 218, 76);
+  width: 90%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.todo_text{
+  
 }
 
 .btn_dele{
-  background-color: #f3c1c8;
-  color: #120e06;
+  /* position: absolute;
+  right: -65px;
+  top: 15%; */
+  transform: scale(1.2);
 }
 
 .btn_dele:hover{

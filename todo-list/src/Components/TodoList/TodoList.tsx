@@ -184,8 +184,8 @@ function TodoList() {
     return (
         <div className="container">
             <div className="content">
-                <h1 className="title"> <CarryOutOutlined /> Todo List <Clock/> </h1>
-                
+                <h1 className="title"> <CarryOutOutlined /> Todo List <Clock /> </h1>
+
                 <div className="input_content">
                     <Input
                         className="input"
@@ -206,22 +206,26 @@ function TodoList() {
                 </div>
                 <ul className='list'>
                     {state.map(todo => (
-                        <li key={todo.id} className="" 
+                        <li key={todo.id} className=""
+
+                        onClick={() => dispatch({ type: "TOGGLE_todo", payload: todo.id })}
+
                         >
                             <Checkbox className='check_box'
-
-                                onChange={() => dispatch({ type: "TOGGLE_todo", payload: todo.id })}
                                 checked={todo.complete}
                             >
                             </Checkbox>
-                            {todo.content}
-
-                            {/* [{time.getHours()}:{time.getMinutes()}] [{time.getDate()}/{time.getUTCMonth() + 1}/{time.getFullYear()}] */}
+                            <div className='todo_content' >
+                                <span className='todo_text'>
+                                    {todo.content}
+                                </span>
+                            </div>
                             <Button onClick={() => dispatch({ type: "DELE_todo", payload: todo.id })}
                                 className="btn_dele"
                             >
                                 <CloseOutlined />
                             </Button>
+
                         </li>
                     ))}
                 </ul>
