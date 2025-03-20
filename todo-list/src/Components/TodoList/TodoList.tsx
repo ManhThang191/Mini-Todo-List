@@ -117,7 +117,7 @@ import { Input, Button, Checkbox } from 'antd'
 import { CloseOutlined, CarryOutOutlined } from '@ant-design/icons'
 import "tailwindcss";
 import Todo from '../Todos/Todo';
-
+import Clock from '../Clock/Clock';
 type Todo = {
     id: number,
     content: string,
@@ -129,7 +129,7 @@ type Action = | { type: "ADD_todo"; payload: string } | { type: "TOGGLE_todo"; p
 
 // mang ban dau trong
 
-const time : Date = new Date()
+const time: Date = new Date()
 
 function reducer_Todo(state: Todo[], action: Action): Todo[] {
 
@@ -140,17 +140,17 @@ function reducer_Todo(state: Todo[], action: Action): Todo[] {
             newState = [...state, { id: Date.now(), content: action.payload, complete: false }];
 
         }
-        break;
+            break;
 
         case "TOGGLE_todo":
             newState = state.map(todo =>
                 todo.id === action.payload ? { ...todo, complete: !todo.complete } : todo
             );
 
-        break;
+            break;
         case "DELE_todo":
             newState = state.filter(todo => todo.id !== action.payload);
-        break
+            break
         default:
             return state;
     }
@@ -184,7 +184,8 @@ function TodoList() {
     return (
         <div className="container">
             <div className="content">
-                <h1 className="title"> <CarryOutOutlined /> Todo List</h1>
+                <h1 className="title"> <CarryOutOutlined /> Todo List <Clock/> </h1>
+                
                 <div className="input_content">
                     <Input
                         className="input"
@@ -193,8 +194,8 @@ function TodoList() {
                         onChange={e => setText(e.target.value)}
                         placeholder="Thêm công việc..."
                         onKeyDown={handleKeyDown}
-                        >
-                        
+                    >
+
                     </Input>
                     <Button
                         className='button'
@@ -205,18 +206,19 @@ function TodoList() {
                 </div>
                 <ul className='list'>
                     {state.map(todo => (
-                        <li key={todo.id} className="" >
+                        <li key={todo.id} className="" 
+                        >
                             <Checkbox className='check_box'
 
                                 onChange={() => dispatch({ type: "TOGGLE_todo", payload: todo.id })}
                                 checked={todo.complete}
                             >
                             </Checkbox>
-                            {todo.content} 
+                            {todo.content}
 
                             {/* [{time.getHours()}:{time.getMinutes()}] [{time.getDate()}/{time.getUTCMonth() + 1}/{time.getFullYear()}] */}
                             <Button onClick={() => dispatch({ type: "DELE_todo", payload: todo.id })}
-                                className=""
+                                className="btn_dele"
                             >
                                 <CloseOutlined />
                             </Button>
